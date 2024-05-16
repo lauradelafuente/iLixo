@@ -1,0 +1,13 @@
+br\com\fiap\iLixo\repository\ClienteRepository.class
+br\com\fiap\iLixo\dao\Conexao.class
+br\com\fiap\iLixo\model\Coleta.class
+br\com\fiap\iLixo\controller\ClienteController.class
+br\com\fiap\iLixo\controller\ColetaController.class
+br\com\fiap\iLixo\repository\ColetaRepository.class
+br\com\fiap\iLixo\dao\ColetaDao.class
+br\com\fiap\iLixo\service\ColetaService.class
+br\com\fiap\iLixo\dao\ClienteDao.class
+iLixoApplication.class
+br\com\fiap\iLixo\service\ClienteService.class
+br\com\fiap\iLixo\model\Cliente.class
+br\com\fiap\iLixo\iLixoApp.class
