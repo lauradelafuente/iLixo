@@ -55,10 +55,10 @@ public class ColetaService {
 		}
 	}
 
-	// chama o findBtColetaBeetwen para mostrar as coletas entre a data inicial e
+	// chama o findByColetaBeetwen para mostrar as coletas entre a data inicial e
 	// final
 	public List<Coleta> mostarColetas(LocalDate dataInicial, LocalDate dataFinal) {
-		return coletaRepository.findByDataColetaBetween(dataInicial, dataFinal);
+		return coletaRepository.findByDataColetaBetween(dataInicial, dataFinal).stream().toList();
 	}
 
 	public Coleta atualizar(Coleta coleta) {

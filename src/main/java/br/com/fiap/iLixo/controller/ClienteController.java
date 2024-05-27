@@ -11,11 +11,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.fiap.iLixo.dto.ClienteCadastroDto;
+import br.com.fiap.iLixo.dto.ClienteExibicaoDto;
 import br.com.fiap.iLixo.model.Cliente;
 import br.com.fiap.iLixo.service.ClienteService;
+import jakarta.validation.Valid;
 
 //classe que recebe a requisição vinda do cliente
 @RestController
@@ -28,10 +32,11 @@ public class ClienteController {
 	@PostMapping("/gravar")
 	//devolve 201 - objeto criado
 	@ResponseStatus(HttpStatus.CREATED)
-	//@ - quando a requisição for enviada, o contato será gravado e o spring pega o objeto no body da req e converte o json (que vai receber uma string) em um objeto persistido no banco
-	public Cliente gravar(@RequestBody Cliente cliente) {
+	//@1 - quando a requisição for enviada, o contato será gravado e o spring pega o objeto no body da req e converte o json (que vai receber uma string) em um objeto persistido no banco
+	//@2 - faz a validação do dto
+	public ClienteExibicaoDto gravar(@RequestBody @Valid ClienteCadastroDto clienteCadastroDto) {
 		//chama o método gravar da service que utiliza o cliente recebido e utiliza o repository para fazer a gravação 	
-		return service.gravar(cliente);
+		return service.gravar(clienteCadastroDto);
 		
 	}
 	
@@ -42,6 +47,12 @@ public class ClienteController {
 		return service.listarTodosOsClientes();
 	}
 	
+	@GetMapping("/buscarPorId/{id}")
+	@ResponseStatus(HttpStatus.OK)
+	public ClienteExibicaoDto buscarPorId(@PathVariable Long id) {
+		return service.buscarPorId(id);
+	}
+	
 	@DeleteMapping("/deletar/{id}")
 	//devolve 204 - objeto excluido
 	@ResponseStatus(HttpStatus.NO_CONTENT)
@@ -50,15 +61,26 @@ public class ClienteController {
 		service.excluir(id);
 	}
 	
-	@PutMapping("/atualizar")
+	@PutMapping("/atualizar/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public Cliente atualizar(Cliente cliente) {
-		return service.atualizar(cliente);
+	public ClienteExibicaoDto atualizar(@PathVariable Long id, @RequestBody ClienteCadastroDto clienteCadastroDto) {
+		return service.atualizar(clienteCadastroDto);
 	}
 	
-	@GetMapping("/buscarPorNome/{nome}") 
+	@GetMapping("/buscarPorNome/nome/{nome}") 
 	@ResponseStatus(HttpStatus.OK)
-	public Cliente buscarClientePeloNome(@PathVariable String nome) {
+	public List<Cliente> buscarClientePeloNome(@PathVariable String nome) {
 		return service.buscarPeloNome(nome);
+	}
+	
+	@GetMapping(value = "/buscarPorNome", params = "nome")
+	public List<Cliente> buscarClientePorNome(@RequestParam String nome) {
+		return service.buscarPeloNome(nome);
+	}
+	
+	//cliente/buscarPorEmail?email=laura@email.com
+	@GetMapping(value = "/buscarPorEmail", params = "email")
+	public ClienteExibicaoDto buscarClientePeloEmail(@RequestParam String email) {
+		return service.buscarClientePorEmail(email);
 	}
 }

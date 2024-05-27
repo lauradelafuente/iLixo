@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -52,15 +53,23 @@ public class ColetaController {
 		service.excluir(id);
 	}
 	
-	@PutMapping("/atualizar")
+	@PutMapping("/atualizar/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public Coleta atualizar(Coleta coleta) {
+	public Coleta atualizar(@PathVariable Long id, @RequestBody Coleta coleta) {
 		return service.atualizar(coleta);
 	}
 	
+	//coletas/mostrarPorData/2024-05-19/2024-05-28
 	@GetMapping("/mostrarPorData/{dataInicial}/{dataFinal}") 
 	@ResponseStatus(HttpStatus.OK)
 	public List<Coleta> mostrarColetas(@PathVariable LocalDate dataInicial, @PathVariable LocalDate dataFinal) {
+		return service.mostarColetas(dataInicial, dataFinal);
+	}
+	
+	//coletas/mostrarPorData?dataInicial=2024-05-19&dataFinal=2024-05-28
+	@GetMapping(value = "/mostrarPorData", params = {"dataInicial","dataFinal"}) 
+	@ResponseStatus(HttpStatus.OK)
+	public List<Coleta> mostrarColetasPorData(@RequestParam LocalDate dataInicial, @RequestParam LocalDate dataFinal) {
 		return service.mostarColetas(dataInicial, dataFinal);
 	}
 }

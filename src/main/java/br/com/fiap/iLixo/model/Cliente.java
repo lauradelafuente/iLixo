@@ -10,9 +10,19 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "tb_cliente")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
 public class Cliente {
 
 	@Id
@@ -27,6 +37,7 @@ public class Cliente {
 	private String endereco;
 	private long telefone;
 	private String email;
+	private String senha;
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "coleta_id")
@@ -80,9 +91,17 @@ public class Cliente {
 	public void setColeta(Coleta coleta) {
 		this.coleta = coleta;
 	}
+	
+	public String getSenha() {
+		return senha;
+	}
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
 	@Override
 	public String toString() {
-	    return "Cliente [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", cep=" + cep + ", endereco=" + endereco + ", telefone="
-	            + telefone + ", email=" + email + ", coleta=" + coleta.getId() + "]";
-	}	
+		return "Cliente [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", cep=" + cep + ", endereco=" + endereco
+				+ ", telefone=" + telefone + ", email=" + email + ", senha=" + senha + ", coleta=" + coleta + "]";
+	}
+	
 }

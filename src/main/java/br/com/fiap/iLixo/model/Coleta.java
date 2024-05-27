@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -25,11 +27,15 @@ public class Coleta{
 	//aponta a sequencia a ser utilizada no DB
 	@SequenceGenerator(name = "TB_COLETA_SEQ", sequenceName = "TB_COLETA_SEQ", allocationSize = 1)
 	public Long id;
+	@JsonProperty("cep_final")
     @Column(name = "cep_final")
     private String cepFinal;
+	@JsonProperty("cep_inicial")
     @Column(name = "cep_inicial")
     private String cepInicial;
+	@JsonProperty("data_coleta")
     @Column(name = "data_coleta")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDate dataColeta;
     @JsonIgnore
 	@OneToMany(mappedBy = "coleta")
