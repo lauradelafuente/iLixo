@@ -15,6 +15,7 @@ br\com\fiap\iLixo\repository\ClienteRepository.class
 br\com\fiap\iLixo\controller\UsuarioController.class
 br\com\fiap\iLixo\service\UsuarioService.class
 br\com\fiap\iLixo\dao\Conexao.class
+br\com\fiap\iLixo\dto\TokenDto.class
 br\com\fiap\iLixo\model\Coleta.class
 br\com\fiap\iLixo\exception\ApplicationExceptionHandler.class
 br\com\fiap\iLixo\model\UsuarioRole.class
@@ -22,8 +23,9 @@ br\com\fiap\iLixo\controller\AuthController.class
 br\com\fiap\iLixo\dto\ClienteExibicaoDto.class
 br\com\fiap\iLixo\exception\UsuarioNaoEncontradoException.class
 br\com\fiap\iLixo\service\ClienteService.class
+br\com\fiap\iLixo\config\security\TokenService.class
 br\com\fiap\iLixo\exception\ClienteNaoEncontradoException.class
 br\com\fiap\iLixo\dto\ClienteCadastroDto.class
 br\com\fiap\iLixo\model\Cliente.class
-br\com\fiap\iLixo\iLixoApp.class
 br\com\fiap\iLixo\model\Usuario.class
+br\com\fiap\iLixo\config\security\VerificarToken.class
