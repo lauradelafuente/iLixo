@@ -5,6 +5,7 @@ WORKDIR /app
 COPY . .
 # Roda o Maven para construir o projeto e criar o .jar
 RUN mvn clean package -DskipTests
+
 # Etapa 2: Utilizar uma imagem Java para rodar o .jar
 FROM openjdk:17-jdk-alpine
 WORKDIR /app
@@ -12,5 +13,9 @@ WORKDIR /app
 COPY --from=build /app/target/iLixo-0.0.1-SNAPSHOT.jar /app/iLixo.jar
 # Expoe a porta na qual a aplicação vai rodar
 EXPOSE 8080
+
+# Configura o perfil de execução
+ENV SPRING_PROFILES_ACTIVE=prd
+
 # Comando para executar a aplicação
-CMD ["java", "-jar", "/app/iLixo.jar"]
+ENTRYPOINT ["java", "-jar", "/app/iLixo.jar"]
