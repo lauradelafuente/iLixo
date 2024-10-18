@@ -31,6 +31,30 @@
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
+			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>br.com.fiap.iLixo.iLixoApplication</mainClass> 
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+			<plugin>
+    			<groupId>org.springframework.boot</groupId>
+    			<artifactId>spring-boot-maven-plugin</artifactId>
+    			<version>3.2.1</version> 
+    			<executions>
+        			<execution>
+            			<goals>
+               			<goal>repackage</goal>
+            			</goals>
+        			</execution>
+    			</executions>
+			</plugin>
 		</plugins>
 		<resources>
 			<resource>
