@@ -1,0 +1,19 @@
+CREATE TABLE TB_CLIENTE (
+    id BIGINT PRIMARY KEY,
+    nome VARCHAR(255),
+    cpf VARCHAR(11),
+    cep VARCHAR(8),
+    endereco VARCHAR(255),
+    telefone BIGINT,
+    email VARCHAR(255),
+    senha VARCHAR(255),
+    coleta_id BIGINT,
+    CONSTRAINT fk_coleta FOREIGN KEY (coleta_id) REFERENCES Coleta(id)
+);
+
+CREATE SEQUENCE TB_CLIENTE_SEQ
+    START WITH 1
+    INCREMENT BY 1;
+
+ALTER TABLE TB_CLIENTE 
+    ALTER COLUMN id SET DEFAULT NEXTVAL('TB_CLIENTE_SEQ');

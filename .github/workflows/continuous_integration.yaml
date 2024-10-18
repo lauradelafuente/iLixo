@@ -2,9 +2,11 @@ name: Continuous Integration
 on:
     pull_request:
         types: [opened, reopened]
-        branches: "dev"
+        branches: 
+        - dev       
+        - feature/** 
 jobs:
-    tests:
+    build:
         runs-on: ubuntu-latest
         steps:             
         -  
