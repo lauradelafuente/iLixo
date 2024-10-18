@@ -5,8 +5,8 @@ on:
         branches: 
         - dev       
         - feature/** 
-build:
-    tests:
+jobs:
+    build:
         runs-on: ubuntu-latest
         steps:             
         -  
