@@ -1,0 +1,26 @@
+services:
+  db:
+    container_name: oracle-db
+    image: oracle/database 
+    ports:
+      - "1521:1521"  
+    environment:
+      - ORACLE_PWD=040203  
+      - ORACLE_ALLOW_REMOTE=true  # Permitir conexões remotas
+    volumes:
+      - oracle-data:/opt/oracle/oradata  # Para persistência de dados
+
+  api:
+    build: .
+    ports:
+      - "8080:8080"  # Porta exposta para a aplicação
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:oracle:thin:@oracle-db:1521:ORCL 
+      - SPRING_DATASOURCE_USERNAME=RM550156  
+      - SPRING_DATASOURCE_PASSWORD=040203  
+      - SPRING_PROFILES_ACTIVE=prd  
+    depends_on:
+      - db  # Certifica-se de que o banco de dados esteja em execução antes da aplicação
+
+volumes:
+  oracle-data:  # Define um volume para persistir os dados do banco
